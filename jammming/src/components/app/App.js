@@ -1,0 +1,21 @@
+import './App.css';
+import SearchBar from './../searchbar/SearchBar';
+import SearchResults from './../searchresults/SearchResults';
+import Playlist from './../playlist/Playlist';
+
+function App() {
+  return (
+    <div>
+      <h1>Ja<span class="highlight">mmm</span>ing</h1>
+      <div class="App">
+        <SearchBar />
+        <div class="App-playlist">
+          <SearchResults />
+          <Playlist />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
