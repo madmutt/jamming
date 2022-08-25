@@ -27,7 +27,29 @@ class App extends React.Component {
                     name: "Happy",
                     artist: "Farrel Williams",
                     album: "Just Farrel"
-                }] 
+                }
+            ],
+            PlaylistName : "Coool vibes",
+            PlaylistTracks : [
+                {
+                    id: "1",
+                    name: "Freedom",
+                    artist: "George Michael",
+                    album: "Wham Fantastic"
+                },
+                {
+                    id: "2",
+                    name: "Slow Day",
+                    artist: "Bonjovie",
+                    album: "Lyrical Myrical"
+                },
+                {
+                    id: "3",
+                    name: "Happy",
+                    artist: "Farrel Williams",
+                    album: "Just Farrel"
+                }
+            ],
         }
     }
     render() {
@@ -38,7 +60,7 @@ class App extends React.Component {
                     <SearchBar />
                     <div class="App-playlist">
                         <SearchResults searchResults={this.state.searchResults} />
-                        <Playlist />
+                        <Playlist PlaylistName={this.state.PlaylistName} PlaylistTracks={this.state.PlaylistTracks} />
                     </div>
                 </div>
             </div>
