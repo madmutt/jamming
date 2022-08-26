@@ -10,47 +10,9 @@ class App extends React.Component {
         super(props);
 
         this.state = { 
-            searchResults : [
-                {
-                    id: 1,
-                    name: "Freedom",
-                    artist: "George Michael",
-                    album: "Wham Fantastic"
-                },
-                {
-                    id: 2,
-                    name: "Slow Day",
-                    artist: "Bonjovie",
-                    album: "Lyrical Myrical"
-                },
-                {
-                    id: 3,
-                    name: "Happy",
-                    artist: "Farrel Williams",
-                    album: "Just Farrel"
-                }
-            ],
-            playlistName : "Coool vibes",
-            playlistTracks : [
-                {
-                    id: 4,
-                    name: "Bad Habits",
-                    artist: "Ed Sheeran",
-                    album: "Math Tour Set"
-                },
-                {
-                    id: 5,
-                    name: "another song",
-                    artist: "Jimmy",
-                    album: "Weird"
-                },
-                {
-                    id: 6,
-                    name: "Weird Al yankawitz",
-                    artist: "Eat it",
-                    album: "Mad Boys"
-                }
-            ],
+            searchResults : [],
+            playlistName : 'Default',
+            playlistTracks : [],
         }
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
@@ -82,11 +44,17 @@ class App extends React.Component {
 
     savePlayList(){
         const trackURIs = this.state.playlistTracks.map(track => track.uri);
+        Spotify.savePlayList(this.state.playlistName, trackURIs).then(() => {
+            this.updatePlaylistName('New Playlist');
+            document.getElementById('playlist-name').value = 'New Playlist';
+            this.setState({
+                playlistTracks: []
+            });
+        });
     }
 
     search(term){
         Spotify.search(term).then(searchResults => {
-        console.log(searchResults);
                                 this.setState({
                                         searchResults : searchResults
                                 })
@@ -110,6 +78,10 @@ class App extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount(){
+        Spotify.getAccessToken();
     }
 }
 
